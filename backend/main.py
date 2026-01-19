@@ -23,7 +23,7 @@ app.add_middleware(
 async def root():
     return {"message": "LearnPath AI API is running"}
 
-@app.post("/generate-plan", response_model=StudyPlan)
+@app.post("/api/generate-plan", response_model=StudyPlan)
 async def create_study_plan(request: StudyRequest):
     try:
         logger.info(f"Generating plan for topic: {request.topic}")
