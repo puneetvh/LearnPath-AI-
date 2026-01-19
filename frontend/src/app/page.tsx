@@ -14,8 +14,8 @@ export default function Home() {
     setError('');
 
     try {
-      // In production, use env var. For now localhost
-      const res = await fetch('http://localhost:8000/generate-plan', {
+      // Use relative path which Vercel rewrites to backend
+      const res = await fetch('/api/generate-plan', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
