@@ -39,12 +39,18 @@ async def create_study_plan(request: StudyRequest):
         logger.info(f"Generating plan for topic: {request.topic}")
         # Validate Env Var presence
         import os
-        if not os.environ.get("OPENROUTER_API_KEY"):
+        key = os.environ.get("OPENROUTER_API_KEY")
+        if not key:
             raise ValueError("OPENROUTER_API_KEY not found in environment variables")
+        
+        # Log key details for debugging (securely)
+        key_len = len(key)
+        key_prefix = key[:10] + "..." if key_len > 10 else "too_short"
+        logger.info(f"Using Key: Length={key_len}, Prefix={key_prefix}")
             
         plan = await generate_study_plan(request)
         return plan
     except Exception as e:
         logger.error(f"Error generating plan: {str(e)}")
         # Return the actual error message to the client for debugging
-        raise HTTPException(status_code=500, detail=f"Server Error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Server Error: {str(e)} | KeyInfo: {key_prefix if 'key_prefix' in locals() else 'Missing'}")
