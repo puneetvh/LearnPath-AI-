@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from .models import StudyRequest, StudyPlan
-from .agent import generate_study_plan
+from models import StudyRequest, StudyPlan
+from agent import generate_study_plan
 import logging
 
 # Configure logging

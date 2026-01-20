@@ -1,6 +1,6 @@
 import os
 from pydantic_ai import Agent
-from .models import StudyRequest, StudyPlan
+from models import StudyRequest, StudyPlan
 from dotenv import load_dotenv
 
 load_dotenv()
