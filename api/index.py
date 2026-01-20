@@ -1,7 +1,11 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from models import StudyRequest, StudyPlan
 from agent import generate_study_plan
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import logging
 
 # Configure logging
