@@ -26,12 +26,14 @@ export default function Home() {
       });
 
       if (!res.ok) {
-        throw new Error('Failed to generate plan. Please try again.');
+        const errorData = await res.json();
+        throw new Error(errorData.detail || 'Failed to generate plan. Please try again.');
       }
 
       const result = await res.json();
       setPlan(result);
     } catch (err: any) {
+      console.error(err);
       setError(err.message || 'Something went wrong');
     } finally {
       setLoading(false);
